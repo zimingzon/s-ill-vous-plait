@@ -1,0 +1,31 @@
+project:
+  type: website
+
+website:
+  title: ""
+  navbar:
+    left:
+      - href: index.qmd
+        text: ""
+      - href: store.qmd
+        text: "스토어"
+      - href: about.qmd
+        text: "iPhone"
+      - href: iPad.qmd
+        text: "iPad"
+      - href: Mac.qmd
+        text: "Mac"
+      - href: Vision.qmd
+        text: "Vision"
+      - href: dashboard.qmd
+        text: "전세계 Apple 사용자 분석"
+      - href: sql.qmd
+        text: "source"
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+

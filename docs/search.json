@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "It’s Here. It’s Real. It’s Amazing",
+    "section": "",
+    "text": "It’s Here. It’s Real. It’s Amazing\n\n\n\n\nEditor: Min-je LEE\nDate: 01.18.24\nPlace: Sejong UNIV."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "iPhone",
+    "section": "",
+    "text": "iPhone 15\n\n\nLook who’s back"
+  },
+  {
+    "objectID": "index.html#k-아키하바라",
+    "href": "index.html#k-아키하바라",
+    "title": "やあ久しぶり! (여어 히사시부리!)",
+    "section": "",
+    "text": "오타쿠 수용소에 온 걸 환영한다네! 크킄\n황혼의 태양 속에서 웃을 수 있길.."
+  },
+  {
+    "objectID": "sql.html",
+    "href": "sql.html",
+    "title": "소스코드",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(gapminder)\n\nlifeExp_g &lt;- gapminder %&gt;%\n  filter(year == max(year)) %&gt;%\n  mutate(pop = pop/ 10^8) %&gt;% \n  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) + geom_point() +\n  labs(title = \"1인당 GDP와 Apple 제품 사용자의 관계\",\n       caption = \"Source: LEE minje's Brain\",\n       x = \"1인당 GDP\",\n       y = \"Apple 제품 사용자 비율\") +\n  geom_point() +\n  labs(size = \"인구수 (억명)\", color = \"대륙\") +\n  scale_x_continuous(labels = scales::comma) +\n  theme_bw(base_family = \"AppleGothic\") +\n  facet_wrap(~continent, scales = \"fixed\")\n\nfs::dir_create(\"images\")\nggsave(\"images/lifeExp_g.png\", width = 10, height = 5)\n\n\n\n\n\nlibrary(gt)\nlibrary(gtExtras)\nlifeExp_p &lt;- gapminder %&gt;% \n  group_by(continent) %&gt;% \n  summarise(\n    lifeExp = mean(lifeExp),\n    gdpPercap = mean(gdpPercap),\n    pop = sum(pop)) %&gt;% \n  gt() %&gt;% \n  tab_header(\n    title = \"대륙별 Apple 사용자 비율, 1인당 GDP, 인구수\",\n    subtitle = \"1952~2007년 데이터\") %&gt;% \n  cols_label(\n    lifeExp = \"사용자 비율\",\n    gdpPercap = \"1인당 GDP\",\n    pop = \"인구수 (억명)\") %&gt;% \n  gt_theme_pff()\n\nlifeExp_p %&gt;% \ngtsave(\"images/lifeExp_p.png\")"
+  },
+  {
+    "objectID": "sql.html#표",
+    "href": "sql.html#표",
+    "title": "소스코드",
+    "section": "",
+    "text": "library(gt)\nlibrary(gtExtras)\nlifeExp_p &lt;- gapminder %&gt;% \n  group_by(continent) %&gt;% \n  summarise(\n    lifeExp = mean(lifeExp),\n    gdpPercap = mean(gdpPercap),\n    pop = sum(pop)) %&gt;% \n  gt() %&gt;% \n  tab_header(\n    title = \"대륙별 Apple 사용자 비율, 1인당 GDP, 인구수\",\n    subtitle = \"1952~2007년 데이터\") %&gt;% \n  cols_label(\n    lifeExp = \"사용자 비율\",\n    gdpPercap = \"1인당 GDP\",\n    pop = \"인구수 (억명)\") %&gt;% \n  gt_theme_pff()\n\nlifeExp_p %&gt;% \ngtsave(\"images/lifeExp_p.png\")"
+  },
+  {
+    "objectID": "sql.html#인당-gdp와-애니메이션-시청자의-관계",
+    "href": "sql.html#인당-gdp와-애니메이션-시청자의-관계",
+    "title": "소스코드",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(gapminder)\n\nlifeExp_g &lt;- gapminder %&gt;%\n  filter(year == max(year)) %&gt;%\n  mutate(pop = pop/ 10^8) %&gt;% \n  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) + geom_point() +\n  labs(title = \"1인당 GDP와 Apple 제품 사용자의 관계\",\n       caption = \"Source: LEE minje's Brain\",\n       x = \"1인당 GDP\",\n       y = \"Apple 제품 사용자 비율\") +\n  geom_point() +\n  labs(size = \"인구수 (억명)\", color = \"대륙\") +\n  scale_x_continuous(labels = scales::comma) +\n  theme_bw(base_family = \"AppleGothic\") +\n  facet_wrap(~continent, scales = \"fixed\")\n\nfs::dir_create(\"images\")\nggsave(\"images/lifeExp_g.png\", width = 10, height = 5)"
+  }
+]

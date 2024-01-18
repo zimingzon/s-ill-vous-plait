@@ -1,0 +1,12 @@
+---
+title: "Apple user statistics around the world"
+format: dashboard
+---
+
+# 그래프
+
+![](images/lifeExp_g.png)
+
+# 표
+
+![](images/lifeExp_p.png)

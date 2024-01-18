@@ -1,0 +1,66 @@
+---
+title: "소스코드"
+editor_options: 
+  chunk_output_type: console
+---
+
+# R 프로그래밍
+## 1인당 GDP와 애니메이션 시청자의 관계
+```{r}
+library(tidyverse)
+library(gapminder)
+
+lifeExp_g <- gapminder %>%
+  filter(year == max(year)) %>%
+  mutate(pop = pop/ 10^8) %>% 
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) + geom_point() +
+  labs(title = "1인당 GDP와 Apple 제품 사용자의 관계",
+       caption = "Source: LEE minje's Brain",
+       x = "1인당 GDP",
+       y = "Apple 제품 사용자 비율") +
+  geom_point() +
+  labs(size = "인구수 (억명)", color = "대륙") +
+  scale_x_continuous(labels = scales::comma) +
+  theme_bw(base_family = "AppleGothic") +
+  facet_wrap(~continent, scales = "fixed")
+
+fs::dir_create("images")
+ggsave("images/lifeExp_g.png", width = 10, height = 5)
+
+```
+
+## 표
+```{r}
+library(gt)
+library(gtExtras)
+lifeExp_p <- gapminder %>% 
+  group_by(continent) %>% 
+  summarise(
+    lifeExp = mean(lifeExp),
+    gdpPercap = mean(gdpPercap),
+    pop = sum(pop)) %>% 
+  gt() %>% 
+  tab_header(
+    title = "대륙별 Apple 사용자 비율, 1인당 GDP, 인구수",
+    subtitle = "1952~2007년 데이터") %>% 
+  cols_label(
+    lifeExp = "사용자 비율",
+    gdpPercap = "1인당 GDP",
+    pop = "인구수 (억명)") %>% 
+  gt_theme_pff()
+
+lifeExp_p %>% 
+gtsave("images/lifeExp_p.png")
+```
+
+# 그래프
+```{r}
+library(tidyverse)
+library(gapminder)
+
+conflicted::conflict_prefer("filter", "dplyr")
+
+gapminder
+
+
+
